@@ -60,6 +60,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Ball.cs" />
      <Compile Include="Assets\Scripts\BallUserControl.cs" />
+     <Compile Include="Assets\Scripts\DestroyOnTrigger.cs" />
+     <Compile Include="Assets\Scripts\MoveToPoint.cs" />
      <Compile Include="Assets\Scripts\Platform.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
  <Reference Include="Unity.Timeline.Editor">

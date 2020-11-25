@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         GameObject platform = GameObject.FindGameObjectWithTag("Respawn");
-        spawnCenter = platform.transform.position + Vector3.up * 5;
+        spawnCenter = platform.transform.position; // + Vector3.up * 5;
         
         InstantiatePeriodically();
     }
@@ -29,9 +29,19 @@ public class Spawner : MonoBehaviour
 
     void InstantiatePeriodically()
     {
-        Vector3 rand= Random.insideUnitCircle * 6;
-        Vector3 spawnPoint = spawnCenter + rand;
-        Instantiate(prefab, spawnPoint, Quaternion.identity);
+        Vector2 rand= Random.insideUnitCircle * 6;
+        Vector3 spawnPoint = spawnCenter + new Vector3(rand.x, 0, rand.y);
+        GameObject ball = Instantiate(prefab, spawnPoint, Quaternion.identity);
+        
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        Transform tra = ball.GetComponent<Transform>();
+        MoveToPoint mtp = ball.GetComponent<MoveToPoint>();
+        
+        tra.localScale *= Random.Range(0.5f, 2.0f);
+        rb.mass *= Random.Range(0.5f, 2.0f);
+        mtp.ScaleMovePower(Random.Range(0.5f, 2.0f));
+        mtp.ScaleMaxAngularVelocity(Random.Range(0.5f, 2.0f));
+        
         
         Invoke("InstantiatePeriodically", period);
     }
