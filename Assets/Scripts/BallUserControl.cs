@@ -12,7 +12,8 @@ using UnityEngine;
 
         private Transform cam; // A reference to the main camera in the scenes transform
         private Vector3 camForward; // The current forward direction of the camera
-        //private bool jump; // whether the jump button is currently pressed
+        
+        [SerializeField] private float planeY = 0;
 
 
         private void Awake()
@@ -37,11 +38,22 @@ using UnityEngine;
 
         private void Update()
         {
+            Plane plane = new Plane(Vector3.up,new Vector3(0, planeY, 0));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float distance;
+            if(plane.Raycast(ray, out distance)) {
+                move = ray.GetPoint(distance);
+            }
+            move = Vector3.Cross(transform.position - move, Vector3.up);
+        }
+
+        // old update for keyboard input
+        /*private void Update()
+        {
             // Get the axis and jump input.
 
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
-            //jump = Input.GetButton("Jump");
 
             // calculate move direction
             if (cam != null)
@@ -55,14 +67,13 @@ using UnityEngine;
                 // we use world-relative directions in the case of no main camera
                 move = (v*Vector3.forward + h*Vector3.right).normalized;
             }
-        }
+        }*/
 
 
         private void FixedUpdate()
         {
             // Call the Move function of the ball controller
-            ball.Move(move); //, jump);
-            //jump = false;
+            ball.Move(move);
         }
     }
 
