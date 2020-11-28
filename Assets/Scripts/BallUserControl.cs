@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 //namespace UnityStandardAssets.Vehicles.Ball
 
@@ -14,6 +15,8 @@ using UnityEngine;
         private Vector3 camForward; // The current forward direction of the camera
         
         [SerializeField] private float planeY = 0;
+
+        private Vector3 previousMousePos;
 
 
         private void Awake()
@@ -33,9 +36,20 @@ using UnityEngine;
                     "Warning: no main camera found. Ball needs a Camera tagged \"MainCamera\", for camera-relative controls.");
                 // we use world-relative controls in this case, which may not be what the user wants, but hey, we warned them!
             }
+            
+            previousMousePos = Vector3.zero;
         }
 
-
+        
+        // untested
+        /*
+        private void Update()
+        { 
+            
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+            move = new Vector3(touchDeltaPosition.x, 0, touchDeltaPosition.y);
+        } */
+        
         private void Update()
         {
             Plane plane = new Plane(Vector3.up,new Vector3(0, planeY, 0));

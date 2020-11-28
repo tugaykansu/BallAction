@@ -6,10 +6,12 @@ using UnityEngine;
 public class DestroyOnTrigger : MonoBehaviour
 {
     private GameOver gameOver;
+    private LevelController levelController;
     
     private void Start()
     {
         gameOver = GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOver>();
+        levelController = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +20,12 @@ public class DestroyOnTrigger : MonoBehaviour
         {
             gameOver.StopGame();
         }
+        else
+        {
+            levelController.NextLevel();
+        }
         
         Destroy(other.gameObject);
+        
     }
 }
