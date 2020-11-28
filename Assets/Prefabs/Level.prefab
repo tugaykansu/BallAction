@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bd40e5e5b56a6ff9fe2240b70ca64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planeY: 0
+  planeY: -8
 --- !u!1 &8679837333808439202
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a28e7459b09a91a7b959f120f0b32b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreController: {fileID: 0}
 --- !u!1 &8679837334503743445
 GameObject:
   m_ObjectHideFlags: 0

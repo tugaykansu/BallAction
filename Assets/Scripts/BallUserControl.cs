@@ -42,14 +42,19 @@ using UnityEngine.PlayerLoop;
 
         
         // untested
-        /*
-        private void Update()
-        { 
-            
-            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-            move = new Vector3(touchDeltaPosition.x, 0, touchDeltaPosition.y);
-        } */
         
+        private void Update()
+        {
+            Debug.Log(Input.mousePosition - previousMousePos);
+
+            move = Input.mousePosition - previousMousePos;
+            move = new Vector3(move.y, 0 ,-move.x);
+            
+            previousMousePos = Input.mousePosition;
+        } 
+        
+        // old update to follow pointer
+        /*
         private void Update()
         {
             Plane plane = new Plane(Vector3.up,new Vector3(0, planeY, 0));
@@ -59,7 +64,7 @@ using UnityEngine.PlayerLoop;
                 move = ray.GetPoint(distance);
             }
             move = Vector3.Cross(transform.position - move, Vector3.up);
-        }
+        }*/
 
         // old update for keyboard input
         /*private void Update()
