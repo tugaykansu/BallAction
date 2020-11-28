@@ -9,19 +9,22 @@ public class MoveToPoint : MonoBehaviour
     [SerializeField] private float maxAngularVelocity = 15; // The maximum velocity the ball can rotate at.
     
     private Rigidbody rb;
-    private Transform center; // A reference to the center point in the scenes transform
+    // private Transform center; // A reference to the center point in the scenes transform
+    private GameObject player; // A reference to the center point in the scenes transform
     private Vector3 moveDirection;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = maxAngularVelocity;
-        center = GameObject.FindGameObjectWithTag("Respawn").transform;
+        // center = GameObject.FindGameObjectWithTag("Respawn").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     private void Update()
     {
-        moveDirection = Vector3.Cross(transform.position - center.transform.position, Vector3.up);
+        moveDirection = Vector3.Cross(transform.position - player.transform.position, Vector3.up);
     }
 
     private void FixedUpdate()

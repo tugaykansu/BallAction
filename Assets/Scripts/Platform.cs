@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    [SerializeField] private ScoreController scoreController;
+    
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trnk");
+        if (! other.gameObject.CompareTag("Player"))
+        {
+            scoreController.ChangeScore(10);
+        }
+        
     }
 }

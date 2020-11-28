@@ -21,12 +21,6 @@ public class Spawner : MonoBehaviour
         InstantiatePeriodically();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void InstantiatePeriodically()
     {
         Vector2 rand= Random.insideUnitCircle * 6;

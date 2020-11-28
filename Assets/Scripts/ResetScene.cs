@@ -10,9 +10,15 @@ public class ResetScene : MonoBehaviour
         
     void Update()
     {
-        if(Input.GetKeyDown(ResetKey)){
-            Time.timeScale = 1;
-            SceneManager.LoadScene("StartScene");
+        if(Input.GetKeyDown(ResetKey))
+        {
+            RestartGame();
         }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("StartScene");
     }
 }
