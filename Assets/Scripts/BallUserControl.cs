@@ -14,6 +14,7 @@ using UnityEngine.PlayerLoop;
         private Transform cam; // A reference to the main camera in the scenes transform
         private Vector3 camForward; // The current forward direction of the camera
         
+        [SerializeField] private float maxMagnitude = 1;
         [SerializeField] private float planeY = 0;
 
         private Vector3 previousMousePos;
@@ -37,18 +38,17 @@ using UnityEngine.PlayerLoop;
                 // we use world-relative controls in this case, which may not be what the user wants, but hey, we warned them!
             }
             
-            previousMousePos = Vector3.zero;
+            previousMousePos = Input.mousePosition;
         }
 
         
-        // untested
-        
         private void Update()
         {
-            Debug.Log(Input.mousePosition - previousMousePos);
+            Debug.Log((Input.mousePosition - previousMousePos) * Time.deltaTime);
 
-            move = Input.mousePosition - previousMousePos;
-            move = new Vector3(move.y, 0 ,-move.x);
+            move = (Input.mousePosition - previousMousePos) * Time.deltaTime;
+            move = new Vector3(move.x, 0 ,move.y);
+            move = Vector3.ClampMagnitude(move, maxMagnitude);
             
             previousMousePos = Input.mousePosition;
         } 
@@ -93,6 +93,7 @@ using UnityEngine.PlayerLoop;
         {
             // Call the Move function of the ball controller
             ball.Move(move);
+
         }
     }
 

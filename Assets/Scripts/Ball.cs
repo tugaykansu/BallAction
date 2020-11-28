@@ -23,8 +23,14 @@ using UnityEngine;
         {
             // m_Rigidbody.AddTorque(new Vector3(moveDirection.z, 0, -moveDirection.x)*m_MovePower);
             
-            m_Rigidbody.AddTorque(moveDirection*m_MovePower);
-            
+            // m_Rigidbody.AddTorque(moveDirection*m_MovePower);
+            if(0.1f < moveDirection.magnitude){
+                m_Rigidbody.velocity = moveDirection*m_MovePower;
+            }
+            else{
+                m_Rigidbody.velocity = m_Rigidbody.velocity * (1-Time.deltaTime);
+            }
+                       
         }
     }
 
