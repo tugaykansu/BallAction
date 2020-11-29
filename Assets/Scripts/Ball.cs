@@ -42,6 +42,12 @@ namespace UnityStandardAssets.Vehicles.Ball
                 // ... add force in upwards.
                 m_Rigidbody.AddForce(Vector3.up*m_JumpPower, ForceMode.Impulse);
             }
+
+            if (moveDirection == Vector3.zero)
+            {
+                m_Rigidbody.velocity = m_Rigidbody.velocity * (1f - Time.deltaTime);
+            }
+            
         }
     }
 }

@@ -159,8 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223ef4aa949c04ea98492d667ff678b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovePower: 100
-  m_MaxAngularVelocity: 8
+  m_MovePower: 20
+  m_UseTorque: 1
+  m_MaxAngularVelocity: 16
 --- !u!114 &8679837333184471343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bd40e5e5b56a6ff9fe2240b70ca64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMagnitude: 1
-  planeY: -8
 --- !u!1 &8679837333808439202
 GameObject:
   m_ObjectHideFlags: 0
