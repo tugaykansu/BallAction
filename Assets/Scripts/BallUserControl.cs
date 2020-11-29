@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityStandardAssets.CrossPlatformInput;
 
-//namespace UnityStandardAssets.Vehicles.Ball
-
+namespace UnityStandardAssets.Vehicles.Ball
+{
     public class BallUserControl : MonoBehaviour
     {
         private Ball ball; // Reference to the ball controller.
@@ -13,11 +13,7 @@ using UnityEngine.PlayerLoop;
 
         private Transform cam; // A reference to the main camera in the scenes transform
         private Vector3 camForward; // The current forward direction of the camera
-        
-        [SerializeField] private float maxMagnitude = 1;
-        [SerializeField] private float planeY = 0;
-
-        private Vector3 previousMousePos;
+        private bool jump; // whether the jump button is currently pressed
 
 
         private void Awake()
@@ -37,42 +33,16 @@ using UnityEngine.PlayerLoop;
                     "Warning: no main camera found. Ball needs a Camera tagged \"MainCamera\", for camera-relative controls.");
                 // we use world-relative controls in this case, which may not be what the user wants, but hey, we warned them!
             }
-            
-            previousMousePos = Input.mousePosition;
         }
 
-        
-        private void Update()
-        {
-            Debug.Log((Input.mousePosition - previousMousePos) * Time.deltaTime);
 
-            move = (Input.mousePosition - previousMousePos) * Time.deltaTime;
-            move = new Vector3(move.x, 0 ,move.y);
-            move = Vector3.ClampMagnitude(move, maxMagnitude);
-            
-            previousMousePos = Input.mousePosition;
-        } 
-        
-        // old update to follow pointer
-        /*
         private void Update()
-        {
-            Plane plane = new Plane(Vector3.up,new Vector3(0, planeY, 0));
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float distance;
-            if(plane.Raycast(ray, out distance)) {
-                move = ray.GetPoint(distance);
-            }
-            move = Vector3.Cross(transform.position - move, Vector3.up);
-        }*/
-
-        // old update for keyboard input
-        /*private void Update()
         {
             // Get the axis and jump input.
 
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            float h = CrossPlatformInputManager.GetAxis("Horizontal");
+            float v = CrossPlatformInputManager.GetAxis("Vertical");
+            jump = CrossPlatformInputManager.GetButton("Jump");
 
             // calculate move direction
             if (cam != null)
@@ -86,14 +56,14 @@ using UnityEngine.PlayerLoop;
                 // we use world-relative directions in the case of no main camera
                 move = (v*Vector3.forward + h*Vector3.right).normalized;
             }
-        }*/
+        }
 
 
         private void FixedUpdate()
         {
             // Call the Move function of the ball controller
-            ball.Move(move);
-
+            ball.Move(move, jump);
+            jump = false;
         }
     }
-
+}
