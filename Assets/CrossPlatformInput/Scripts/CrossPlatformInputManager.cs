@@ -23,16 +23,21 @@ namespace UnityStandardAssets.CrossPlatformInput
 		{
 			s_TouchInput = new MobileInput();
 			s_HardwareInput = new StandaloneInput();
+			
+			activeInput = s_TouchInput;
+/*
 #if MOBILE_INPUT
             activeInput = s_TouchInput;
 #else
 			activeInput = s_HardwareInput;
 #endif
+*/
 		}
 
 		public static void SwitchActiveInputMethod(ActiveInputMethod activeInputMethod)
 		{
-			switch (activeInputMethod)
+			activeInput = s_TouchInput;
+			/*switch (activeInputMethod)
 			{
 				case ActiveInputMethod.Hardware:
 					activeInput = s_HardwareInput;
@@ -41,7 +46,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 				case ActiveInputMethod.Touch:
 					activeInput = s_TouchInput;
 					break;
-			}
+			}*/
 		}
 
 		public static bool AxisExists(string name)
